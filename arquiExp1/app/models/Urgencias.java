@@ -4,4 +4,9 @@ package models;
  * Created by af.moreno10 on 10/02/2017.
  */
 public class Urgencias {
+
+    private Long latitud;
+    private Long longitud;
+    private String estadoPaciente;
+
 }
