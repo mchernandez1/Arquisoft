@@ -1,9 +1,10 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by AndresFelipe on 14/02/2017.
@@ -11,7 +12,9 @@ import javax.persistence.Id;
 @Entity
 public class Sensor extends Model {
 
-    //----- CONSTANTES -----
+    //-----------------------------
+    // CONSTANTES
+    //-----------------------------
     /**
      * Constantes creadas para diferenciar los tipos de sensores.
      */
@@ -21,11 +24,14 @@ public class Sensor extends Model {
 
     public static Finder<Long, Sensor> finder = new Finder<>(Sensor.class);
 
-    //---- ATRIBUTOS ----
+    //-----------------------------
+    // ATRIBUTOS
+    //-----------------------------
     /**
      * Atributo identificador del sensor.
      */
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -38,19 +44,34 @@ public class Sensor extends Model {
      */
     private double dato;
 
+    /**
+     * Atributo que indica la fecha de la toma del dato del sensor
+     */
+    private Date fecha;
 
-    //---- CONSTRUCTOR ----
+    //-------------------------
+    // CONSTRUCTOR
+    //-------------------------
+
+    /**
+     * Metodo constructor sin atributos
+     */
+    public Sensor (){
+
+    }
+
     /**
      * Metodo constructor de la clase Sensor
      */
-    public Sensor(Long pId, int pTipo){
-        id = pId;
+    public Sensor(int pTipo){
         tipo = pTipo;
         dato = 0.0;
+        fecha = new Date();
     }
 
-    //---- METODOS ----
-
+    //--------------------------
+    // METODOS
+    //--------------------------
     /**
      * Metodo que retorna el identificador del senor
      * @return id del sensor
@@ -91,12 +112,45 @@ public class Sensor extends Model {
         return dato;
     }
 
+    /**
+     * Metodo que modifica el dato del sensor
+     * @param dato nuevo dato del sensor
+     */
+    public void setDato(double dato){this.dato = dato;}
+
+    /**
+     * Metodo que retorna la fecha en la cual se tomo la medicion del dato.
+     * @return fecha de la medicion
+     */
+    public Date getFecha() {return fecha;}
+
+    /**
+     * Metodo que modifica la fecha en la que se tomo la medicion
+     * @param fecha nueva fecha de medicion
+     */
+    public void setFecha(Date fecha) {this.fecha = fecha;}
+
     @Override
     public String toString() {
         return "Sensor{" +
                 "id=" + id +
                 ", tipo=" + tipo +
                 ", dato=" + dato +
+                ", fecha=" + fecha +
                 '}';
+    }
+
+    //------------------------------
+    // METODOS AUXILIARES
+    //------------------------------
+
+    /**
+     * Crea un objeto Sensor a partir de un nodo JSON
+     * @param j Nodo JSON con valores y atributos de un objeto Sensor
+     */
+    public static Sensor bind(JsonNode j){
+        int tipo = j.findPath("tipo").asInt();
+        Sensor sensor = new Sensor(tipo);
+        return sensor;
     }
 }
