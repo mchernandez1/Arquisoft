@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.*;
 
@@ -10,7 +11,9 @@ import javax.persistence.*;
 @Entity
 public class Sensor extends Model {
 
-    //----- CONSTANTES -----
+    //-----------------------------
+    // CONSTANTES
+    //-----------------------------
     /**
      * Constantes creadas para diferenciar los tipos de sensores.
      */
@@ -20,11 +23,14 @@ public class Sensor extends Model {
 
     public static Finder<Long, Sensor> finder = new Finder<>(Sensor.class);
 
-    //---- ATRIBUTOS ----
+    //-----------------------------
+    // ATRIBUTOS
+    //-----------------------------
     /**
      * Atributo identificador del sensor.
      */
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -38,18 +44,28 @@ public class Sensor extends Model {
     private double dato;
 
 
-    //---- CONSTRUCTOR ----
+    //-------------------------
+    // CONSTRUCTOR
+    //-------------------------
+
+    /**
+     * Metodo constructor sin atributos
+     */
+    public Sensor (){
+
+    }
+
     /**
      * Metodo constructor de la clase Sensor
      */
-    public Sensor(Long pId, int pTipo){
-        id = pId;
+    public Sensor(int pTipo){
         tipo = pTipo;
         dato = 0.0;
     }
 
-    //---- METODOS ----
-
+    //--------------------------
+    // METODOS
+    //--------------------------
     /**
      * Metodo que retorna el identificador del senor
      * @return id del sensor
@@ -97,5 +113,19 @@ public class Sensor extends Model {
                 ", tipo=" + tipo +
                 ", dato=" + dato +
                 '}';
+    }
+
+    //------------------------------
+    // METODOS AUXILIARES
+    //------------------------------
+
+    /**
+     * Crea un objeto Sensor a partir de un nodo JSON
+     * @param j Nodo JSON con valores y atributos de un objeto Sensor
+     */
+    public static Sensor bind(JsonNode j){
+        int tipo = j.findPath("tipo").asInt();
+        Sensor sensor = new Sensor(tipo);
+        return sensor;
     }
 }
