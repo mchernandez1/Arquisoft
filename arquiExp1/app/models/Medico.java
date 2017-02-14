@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
+
 
 /**
  * Clase que representa la información de un medico
@@ -154,14 +154,14 @@ public class Medico extends Model
      * Crear un objeto Medico apartir de un nodo Json
      */
 
-    //public static Medico bind(JsonNode j)
-    //{
-       // int idMedico = j.findPath("Id Medico").asInt();
-        //String nombreMedico = j.findPath("Nombre Medico").asText();
-       // String especialidadMedico = j.findPath("Especialidad medico").asText();
-        //String descripcionMedico = j.findPath("Descripción medico").asText();
-        //Medico medico = new Medico(idMedico, nombreMedico, especialidadMedico, descripcionMedico);
+    public static Medico bind(JsonNode j)
+    {
+       int idMedico = j.findPath("idMedico").asInt();
+        String nombreMedico = j.findPath("Nombre Medico").asText();
+        String especialidadMedico = j.findPath("Especialidad medico").asText();
+        String descripcionMedico = j.findPath("Descripción medico").asText();
+        Medico medico = new Medico(idMedico, nombreMedico, especialidadMedico, descripcionMedico);
 
-       // return medico;
-    //}
+        return medico;
+    }
 }
