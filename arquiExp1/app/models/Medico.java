@@ -2,17 +2,17 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Clase que representa la información de un medico
  * Created by af.moreno10 on 10/02/2017.
  */
 
-//@Entity
+@Entity
 
 public class Medico extends Model
 {
