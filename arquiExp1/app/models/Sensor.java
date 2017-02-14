@@ -2,7 +2,8 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Created by AndresFelipe on 14/02/2017.
