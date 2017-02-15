@@ -1,16 +1,17 @@
 package models;
 
+import com.avaje.ebean.Model;
 import sun.management.Sensor;
 
 import java.util.List;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Created by af.moreno10 on 10/02/2017.
  */
 @Entity
 @Table(name="hospital")
-public class Hospital extends Model{
+public class Hospital extends Model {
 
     public static Finder<Long, Hospital> FINDER = new Finder<>(Hospital.class);
 
