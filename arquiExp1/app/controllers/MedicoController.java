@@ -6,8 +6,11 @@ import java.util.concurrent.CompletableFuture;
 import static play.libs.Json.toJson;
 
 import com.avaje.ebean.Model;
+import com.google.inject.Inject;
 import models.Medico;
 import akka.dispatch.MessageDispatcher;
+import play.libs.concurrent.HttpExecution;
+import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.*;
 import java.util.concurrent.CompletionStage;
 import play.libs.Json;
@@ -17,35 +20,116 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class MedicoController extends Controller
 {
-    @BodyParser.Of(BodyParser.Json.class)
+    @Inject
+    HttpExecutionContext ec;
 
-    public Result create()
+    //------------
+    //GET Medicos
+    //------------
+
+   // public CompletionStage<Result> getMedicos()
+    //{
+       // MessageDispatcherjdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+      //  return CompletableFuture.supplyAsync(
+        //        () -> {
+          //          return Medico.FINDER.all();
+            //    }
+              //  ,jdbcDispatcher)
+               // .thenApply(
+                 //       procuctEntities ->
+                   //     {
+                     //       return ok(toJson(procuctEntities));
+                      //  }
+        //)
+   // }
+
+    //------------
+    //GET Medico
+    //------------
+
+  //  public CompletionStage<Result> getMedico(int id)
+  //  {
+//        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+     //   return CompletableFuture.
+        //        supplyAsync(
+                    //    () -> {
+                  //          return Medico.FINDER.byId(id);
+                //        }
+              //          ,jdbcDispatcher)
+            //    .thenApply(
+          //              productEntities -> {
+        //                    return ok(toJson(productEntities));
+      //                  }
+    //            );
+  //  }
+
+
+     //------------
+     //POST Medico
+     //------------
+   // public Result createMedico()
+   // {
+     //   JsonNode j = request().body().asJson();
+       // Medico medico = Json.fromJson(j,Medico.class);
+       // return CompletableFuture.supplyAsync(
+         //       ()->{
+           //         medico.save();
+            //        return medico;
+             //   }
+       // ).thenApply(
+         //       Medico -> {
+           //         return ok(Json.toJson(Medico));
+             //           }
+             //   );
+
+    //}
+
+    //------------
+    //DELETE Medico
+    //------------
+
+    public CompletionStage<Result> deleteMedico(int id)
     {
-        JsonNode j = Controller.request().body().asJson();
-        Medico medico = Medico.bind(j);
-        medico.save();
-        return ok(Json.toJson(medico));
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Medico medico = Medico.FINDER.byId(id);
+                    Medico.FINDER.deleteById(id);
+                    medico = Medico.FINDER.byId(id);
+                    return medico == null;
+                }
+        ).thenApply(
+                productEntity -> {
+                    return ok(Json.toJson(productEntity));
+                }
+        );
     }
 
-    public Result read()
-    {
-        List<Medico> medicos = new Model.Finder(String.class, Medico.class).all();
-        return ok(Json.toJson(medicos));
-    }
-//public CompletionStage<Result> getMedicos()
-//{
-    //MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-    //return CompletableFuture.
-            //supplyAsync()
-              //      ()->{
-                //        return Medico.Finder.all();
-                  //  }
-                    //,jdbcDispatcher
-            //.thenApply(
-                    //Medico->{
-                       // return ok(toJson(Medico));
-                    //}
 
-            //);
-//}
+    //------------
+    //UPDATE Medico
+    //------------
+
+    public CompletionStage<Result> updateMedico(int id){
+
+        return CompletableFuture.
+                supplyAsync(
+                        () -> {
+                            JsonNode medico = request().body().asJson();
+                            Medico mediquillo = Json.fromJson(medico, Medico.class);
+                            Medico medicoActualizar = Medico.FINDER.byId(id);
+                            medicoActualizar.setNombreMedico(mediquillo.getNombreMedico());
+                            medicoActualizar.setEspecialidadMedico(mediquillo.getEspecialidadMedico());
+                            medicoActualizar.setDescripcionMedico(mediquillo.getDescripcionMedico());
+                            medicoActualizar.update();
+                            return medicoActualizar;
+                        }
+                        ,ec.current())
+                .thenApply(
+                        Medico -> {
+                            return ok(toJson(Medico));
+                        }
+                );
+    }
 }
