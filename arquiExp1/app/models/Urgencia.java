@@ -1,16 +1,14 @@
 package models;
 
-import com.sun.javafx.beans.IDProperty;
-
 /**
  * Created by af.moreno10 on 10/02/2017.
  */
 @Entity
 
 @Table(name="urgencias")
-public class Urgencias extends model{
+public class Urgencia extends model{
 
-    public static Finder<Long, Urgencias> FINDER = new Finder<>(Urgencias.class);
+    public static Finder<Long, Urgencia> FINDER = new Finder<>(Urgencia.class);
 
     @Id
 
@@ -22,18 +20,18 @@ public class Urgencias extends model{
     private String estadoPaciente;
 
 
-    public Urgencias(){
+    public Urgencia(){
         this.id = null;
         this.latitud = null;
         this.longitud = null;
         this.estadoPaciente = "";
     }
 
-    public Urgencias(Long id){
+    public Urgencia(Long id){
         this.id = id;
     }
 
-    public Urgencias(Long latitud, Long longitud, String estadoPaciente){
+    public Urgencia(Long latitud, Long longitud, String estadoPaciente){
         this.latitud = latitud;
         this.longitud = longitud;
         this.estadoPaciente = estadoPaciente;
@@ -72,6 +70,12 @@ public class Urgencias extends model{
                 ", longitud='" + longitud +
                 ", estadoPaciente='" + estadoPaciente +
                 '}';
+    }
+
+    public static Urgencia bind(JsonNode j){
+        Long i = j.findPath("id").asLong();
+        Urgencia urgencia = new Urgencia(i);
+        return urgencia;
     }
 
 }
