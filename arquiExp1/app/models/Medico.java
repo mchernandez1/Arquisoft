@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 /**
@@ -14,13 +11,14 @@ import javax.persistence.Id;
  */
 
 @Entity
-
+@Table(name="medicos")
 public class Medico extends Model
 {
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
 
+    public static Model.Finder<Integer, Medico> FINDER = new Model.Finder<>(Medico.class);
     /**
      * Referencia que identifica al medico en el sistema.
      */
@@ -132,11 +130,6 @@ public class Medico extends Model
         this.descripcionMedico = descripcionMedico;
     }
 
-    //public List<Medico> getTodosLosMedicos()
-    //{
-        //List medicos = ;
-        //return List
-    //}
 
     @Override
     public String toString()
@@ -154,14 +147,14 @@ public class Medico extends Model
      * Crear un objeto Medico apartir de un nodo Json
      */
 
-    public static Medico bind(JsonNode j)
-    {
-       int idMedico = j.findPath("idMedico").asInt();
-        String nombreMedico = j.findPath("Nombre Medico").asText();
-        String especialidadMedico = j.findPath("Especialidad medico").asText();
-        String descripcionMedico = j.findPath("Descripción medico").asText();
-        Medico medico = new Medico(idMedico, nombreMedico, especialidadMedico, descripcionMedico);
+   // public static Medico bind(JsonNode j)
+    // {
+       // int idMedico = j.findPath("idMedico").asInt();
+        //String nombreMedico = j.findPath("Nombre Medico").asText();
+       // String especialidadMedico = j.findPath("Especialidad medico").asText();
+       // String descripcionMedico = j.findPath("Descripcion medico").asText();
+       // Medico medico = new Medico(idMedico, nombreMedico, especialidadMedico, descripcionMedico);
 
-        return medico;
-    }
+        //return medico;
+    //}
 }
