@@ -1,6 +1,10 @@
 package models;
 
+import com.avaje.ebean.Finder;
+import com.avaje.ebean.Model;
 import com.sun.javafx.beans.IDProperty;
+
+import javax.persistence.*;
 
 /**
  * Created by af.moreno10 on 10/02/2017.
@@ -8,7 +12,7 @@ import com.sun.javafx.beans.IDProperty;
 @Entity
 
 @Table(name="urgencias")
-public class Urgencias extends model{
+public class Urgencias extends Model {
 
     public static Finder<Long, Urgencias> FINDER = new Finder<>(Urgencias.class);
 

@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by d.marino10 on 15/02/2017.
@@ -29,6 +26,7 @@ public class Medicion extends Model {
 
     private String presion;
 
+    @ManyToOne
     private Paciente paciente;
 
     //-----------------------------------------------------------

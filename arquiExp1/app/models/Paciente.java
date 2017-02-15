@@ -31,6 +31,7 @@ public class Paciente {
 
     private long celular;
 
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Medicion> medicionesHistoricas;
 
 

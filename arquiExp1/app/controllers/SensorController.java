@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class SensorController extends Controller{
 
-    @BodyParser.Of(BodyParser.Json.class)
-    public Result create(){
-        JsonNode j = Controller.request().body().asJson();
-        Sensor sensor = Sensor.bind(j);
-        sensor.save();
-        return ok(Json.toJson(sensor));
-    }
+    //@BodyParser.Of(BodyParser.Json.class)
+    //public Result create(){
+       // JsonNode j = Controller.request().body().asJson();
+       // Sensor sensor = Sensor.bind(j);
+       // sensor.save();
+      //  return ok(Json.toJson(sensor));
+    //}
 }
 

@@ -199,5 +199,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="SBT: org.jetbrains:annotations:13.0:jar" level="project" />
   </component>
 </module>

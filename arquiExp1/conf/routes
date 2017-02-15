@@ -12,3 +12,10 @@ GET     /message                    controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+#paciente
+GET     /paciente                    controllers.PacienteController.getPacientes()
+GET     /paciente/:id                controllers.PacienteController.getPaciente(id : Long)
+POST    /paciente                    controllers.PacienteController.createPaciente()
+DELETE  /paciente/:id                controllers.PacienteController.deletePaciente(id : Long)
+PUT     /paciente/:id                controllers.PacienteController.updatePaciente(id : Long)
