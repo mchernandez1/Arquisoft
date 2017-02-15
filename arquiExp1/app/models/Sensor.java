@@ -10,6 +10,7 @@ import java.util.Date;
  * Created by AndresFelipe on 14/02/2017.
  */
 @Entity
+@Table(name = "sensores")
 public class Sensor extends Model {
 
     //-----------------------------
@@ -18,9 +19,11 @@ public class Sensor extends Model {
     /**
      * Constantes creadas para diferenciar los tipos de sensores.
      */
-    private static int FRECUENCIA = 1;
-    private static int PRESION = 2;
-    private static int ESTRES = 3;
+    public enum TipoSensor{
+        FRECUENCIA,
+        PRESION,
+        ESTRES
+    }
 
     public static Finder<Long, Sensor> finder = new Finder<>(Sensor.class);
 
@@ -31,13 +34,13 @@ public class Sensor extends Model {
      * Atributo identificador del sensor.
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "Sensor")
     private Long id;
 
     /**
      * Atributo que indica el tipo de sensor.
      */
-    private int tipo;
+    private TipoSensor tipo;
 
     /**
      * Atributo que contendra el dato recibido por el sensor
@@ -63,7 +66,7 @@ public class Sensor extends Model {
     /**
      * Metodo constructor de la clase Sensor
      */
-    public Sensor(int pTipo){
+    public Sensor(TipoSensor pTipo){
         tipo = pTipo;
         dato = 0.0;
         fecha = new Date();
@@ -92,7 +95,7 @@ public class Sensor extends Model {
      * Metodo que retorna el tipo del sensor
      * @return tipo del sensor
      */
-    public int getTipo() {
+    public TipoSensor getTipo() {
         return tipo;
     }
 
@@ -100,7 +103,7 @@ public class Sensor extends Model {
      * Metodo que modifica el tipo del sensor
      * @param tipo nuevo tipo del sensor
      */
-    public void setTipo(int tipo) {
+    public void setTipo(TipoSensor tipo) {
         this.tipo = tipo;
     }
 
@@ -143,14 +146,4 @@ public class Sensor extends Model {
     //------------------------------
     // METODOS AUXILIARES
     //------------------------------
-
-    /**
-     * Crea un objeto Sensor a partir de un nodo JSON
-     * @param j Nodo JSON con valores y atributos de un objeto Sensor
-     */
-    public static Sensor bind(JsonNode j){
-        int tipo = j.findPath("tipo").asInt();
-        Sensor sensor = new Sensor(tipo);
-        return sensor;
-    }
 }
