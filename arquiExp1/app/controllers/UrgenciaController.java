@@ -30,8 +30,8 @@ public class UrgenciaController extends Controller{
                         }
                         jdbcDispatcher)
                 .thenApply(
-                        Urgencia->{
-                            return ok(toJson(Urgencia));
+                        urgencias->{
+                            return ok(toJson(urgencias));
                         }
                 );
     }
@@ -50,7 +50,7 @@ public class UrgenciaController extends Controller{
                 Urgencia->{
                     return ok(Json.toJson(Urgencia));
                 }
-        )
+        );
     }
 
 
