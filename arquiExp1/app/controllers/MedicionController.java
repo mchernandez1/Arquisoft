@@ -11,6 +11,10 @@ import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -108,6 +112,22 @@ public class MedicionController extends Controller {
                 .thenApply(
                         campoEntity -> {
                             return ok(toJson(campoEntity));
+                        }
+                );
+    }
+
+    public CompletionStage<Result> getByFecha(String pFecha){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.
+                supplyAsync(
+                        () -> {
+                            return mock.getByFecha(pFecha);
+                        }
+                        ,jdbcDispatcher)
+                .thenApply(
+                        productEntities -> {
+                            return ok(toJson(productEntities));
                         }
                 );
     }

@@ -18,6 +18,7 @@ public class MedidorMock {
         lista = new ArrayList<>();
     }
 
+
     //
 
     public static List<Medicion> getAll() {
@@ -53,5 +54,14 @@ public class MedidorMock {
                 lista.set(i,medicion);
             }
         }
+    }
+
+    public List<Medicion> getByFecha(String pFecha){
+        List<Medicion> listaMed = new ArrayList<Medicion>();
+        for(int i=0; i<lista.size();i++){
+            if(lista.get(i).getFecha()==pFecha)
+                listaMed.add(lista.get(i));
+        }
+        return listaMed;
     }
 }

@@ -20,10 +20,45 @@ POST    /paciente                    controllers.PacienteController.createPacien
 DELETE  /paciente/:id                controllers.PacienteController.deletePaciente(id : Long)
 PUT     /paciente/:id                controllers.PacienteController.updatePaciente(id : Long)
 
+#sensor
+GET     /sensor                      controllers.SensorController.getSensores()
+GET     /sensor/:idSensor            controllers.SensorController.getSensor(idSensor : Long)
+POST    /sensor                      controllers.SensorController.createSensor()
+DELETE  /sensor/:idSensor            controllers.SensorController.deleteSensor(idSensor : Long)
+PUT     /sensor/:idSensor            controllers.SensorController.updateSensor(idSensor : Long)
 
 #Medicion
 GET     /medicion                    controllers.MedicionController.getMediciones()
 GET     /medicion/:id                controllers.MedicionController.getMedicion(id : Long)
+GET     /medicion/:pFecha             controllers.MedicionController.getByFecha(pFecha : String)
 POST    /medicion                    controllers.MedicionController.createMedicion()
 DELETE  /medicion/:id                controllers.MedicionController.deleteMedicion(id : Long)
 PUT     /medicion/:id                controllers.MedicionController.updateMedicion(id : Long)
+
+#Medico
+GET     /medico                    controllers.MedicoController.getMedicos()
+GET     /medico/:id                controllers.MedicoController.getMedico(id : Long)
+POST    /medico                    controllers.MedicoController.createMedico()
+DELETE  /medico/:id                controllers.MedicoController.deleteMedico(id : Long)
+PUT     /medico/:id                controllers.MedicoController.updateMedico(id : Long)
+
+#Medico Especialidad
+GET     /medicoEspecialista                    controllers.MedicoEspecialistaController.getMedicosEspecialista()
+GET     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.getMedicoEspecialista(id : Long)
+POST    /medicoEspecialista                    controllers.MedicoEspecialistaController.createMedicoEspecialista()
+DELETE  /medicoEspecialista/:id                controllers.MedicoEspecialistaController.deleteMedicoEspecialista(id : Long)
+PUT     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.updateMedicoEspecialista(id : Long)
+
+#Urgencias
+GET     /urgencia                    controllers.UrgenciaController.getUrgencias()
+GET     /urgencia/:id                controllers.UrgenciaController.getUrgencia(id : Long)
+POST    /urgencia                    controllers.UrgenciaController.createUrgencia()
+DELETE  /urgencia/:id                controllers.UrgenciaController.deleteUrgencia(id : Long)
+PUT     /urgencia/:id                controllers.UrgenciaController.updateUrgencia(id : Long)
+
+#Hospital
+GET     /hospital                    controllers.HospitalController.getHospitales()
+GET     /hospital/:id                controllers.HospitalController.getHospital(id : Long)
+POST    /hospital                    controllers.HospitalController.createHospital()
+DELETE  /hospital/:id                controllers.HospitalController.deleteHospital(id : Long)
+PUT     /hospital/:id                controllers.HospitalController.updateHospital(id : Long)
