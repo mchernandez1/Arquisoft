@@ -48,3 +48,17 @@ GET     /medicoEspecialista/:id                controllers.MedicoEspecialistaCon
 POST    /medicoEspecialista                    controllers.MedicoEspecialistaController.createMedicoEspecialista()
 DELETE  /medicoEspecialista/:id                controllers.MedicoEspecialistaController.deleteMedicoEspecialista(id : Long)
 PUT     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.updateMedicoEspecialista(id : Long)
+
+#Urgencias
+GET     /urgencia                    controllers.UrgenciaController.getUrgencias()
+GET     /urgencia/:id                controllers.UrgenciaController.getUrgencia(id : Long)
+POST    /urgencia                    controllers.UrgenciaController.createUrgencia()
+DELETE  /urgencia/:id                controllers.UrgenciaController.deleteUrgencia(id : Long)
+PUT     /urgencia/:id                controllers.UrgenciaController.updateUrgencia(id : Long)
+
+#Hospital
+GET     /hospital                    controllers.HospitalController.getHospitales()
+GET     /hospital/:id                controllers.HospitalController.getHospital(id : Long)
+POST    /hospital                    controllers.HospitalController.createHospital()
+DELETE  /hospital/:id                controllers.HospitalController.deleteHospital(id : Long)
+PUT     /hospital/:id                controllers.HospitalController.updateHospital(id : Long)
