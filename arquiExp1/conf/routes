@@ -27,3 +27,17 @@ GET     /medicion/:id                controllers.MedicionController.getMedicion(
 POST    /medicion                    controllers.MedicionController.createMedicion()
 DELETE  /medicion/:id                controllers.MedicionController.deleteMedicion(id : Long)
 PUT     /medicion/:id                controllers.MedicionController.updateMedicion(id : Long)
+
+#Medico
+GET     /medico                    controllers.MedicoController.getMedicos()
+GET     /medico/:id                controllers.MedicoController.getMedico(id : Long)
+POST    /medico                    controllers.MedicoController.createMedico()
+DELETE  /medico/:id                controllers.MedicoController.deleteMedico(id : Long)
+PUT     /medico/:id                controllers.MedicoController.updateMedico(id : Long)
+
+#Medico Especialidad
+GET     /medicoEspecialista                    controllers.MedicoEspecialistaController.getMedicosEspecialista()
+GET     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.getMedicoEspecialista(id : Long)
+POST    /medicoEspecialista                    controllers.MedicoEspecialistaController.createMedicoEspecialista()
+DELETE  /medicoEspecialista/:id                controllers.MedicoEspecialistaController.deleteMedicoEspecialista(id : Long)
+PUT     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.updateMedicoEspecialista(id : Long)
