@@ -18,7 +18,7 @@ public class Medico extends Model
     // Atributos
     //-----------------------------------------------------------
 
-    public static Model.Finder<Integer, Medico> FINDER = new Model.Finder<>(Medico.class);
+    //public static Model.Finder<Integer, Medico> FINDER = new Model.Finder<>(Medico.class);
     /**
      * Referencia que identifica al medico en el sistema.
      */
@@ -28,7 +28,7 @@ public class Medico extends Model
     /**
      * Identificación dentro del sistema del medico.
      */
-    private int idMedico;
+    private Long idMedico;
 
     /**
      * Nombre del medico.
@@ -45,6 +45,7 @@ public class Medico extends Model
      */
     private String descripcionMedico;
 
+
     //-------------------------------------------------------------
     //Constructores
     //-------------------------------------------------------------
@@ -56,7 +57,7 @@ public class Medico extends Model
      * @param especialidad Especialidad que posee el medico
      * @param descripcion Información adicional del medico
      */
-    public Medico(int id, String nombre, String especialidad, String descripcion)
+    public Medico(long id, String nombre, String especialidad, String descripcion)
     {
         this.idMedico = id;
         this.nombreMedico = nombre;
@@ -69,33 +70,33 @@ public class Medico extends Model
      * @param idMedico Identificación del medico
      */
 
-    public Medico(int idMedico)
-    {
-        this.idMedico = idMedico;
-    }
+   // public Medico(Long idMedico)
+    //{
+      //  this.idMedico = idMedico;
+   // }
 
     /**
      * Constructor pruebas SIN parametros
      */
-    public Medico()
-    {
-        this.idMedico=0;
-        this.nombreMedico = "Medico no real";
-        this.especialidadMedico = "No se ha graduado";
-        this.descripcionMedico = "Grupo sanguíneo: o+. No enfermedades hereditarias";
-    }
+    //public Medico()
+    //{
+        //this.idMedico=0L;
+        //this.nombreMedico = "Medico no real";
+        //this.especialidadMedico = "No se ha graduado";
+      //  this.descripcionMedico = "Grupo sanguíneo: o+. No enfermedades hereditarias";
+    //}
 
     //-------------------------------------------------------------
     //Metódos
     //-------------------------------------------------------------
 
 
-    public int getIdMedico()
+    public Long getIdMedico()
     {
         return idMedico;
     }
 
-    public void setIdMedico(int idMedico)
+    public void setIdMedico(Long idMedico)
     {
         this.idMedico = idMedico;
     }
@@ -129,6 +130,7 @@ public class Medico extends Model
     {
         this.descripcionMedico = descripcionMedico;
     }
+
 
 
     @Override
