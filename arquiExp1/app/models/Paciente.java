@@ -34,12 +34,16 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Medicion> medicionesHistoricas;
 
+    private String tratamientos;
+
+    private String examenes;
+
 
     //-----------------------------------------------------------
     // Constructores
     //-----------------------------------------------------------
 
-    public Paciente(long documento, String nombre, String tipoSangre, String pais, String ciudad, long telefono, long celular) {
+    public Paciente(long documento, String nombre, String tipoSangre, String pais, String ciudad, long telefono, long celular, String tratamientos, String examenes) {
         this.documento = documento;
         this.nombre = nombre;
         this.tipoSangre = tipoSangre;
@@ -48,9 +52,11 @@ public class Paciente {
         this.telefono = telefono;
         this.celular = celular;
         medicionesHistoricas=new ArrayList<Medicion>();
+        this.tratamientos=tratamientos;
+        this.examenes=examenes;
     }
 
-    public Paciente(long documento, String nombre, String tipoSangre, String pais, String ciudad, long telefono, long celular, List<Medicion> medicionesHistoricas) {
+    public Paciente(long documento, String nombre, String tipoSangre, String pais, String ciudad, long telefono, long celular, List<Medicion> medicionesHistoricas, String tratamientos, String examenes) {
         this.documento = documento;
         this.nombre = nombre;
         this.tipoSangre = tipoSangre;
@@ -59,6 +65,8 @@ public class Paciente {
         this.telefono = telefono;
         this.celular = celular;
         this.medicionesHistoricas=medicionesHistoricas;
+        this.tratamientos=tratamientos;
+        this.examenes=examenes;
     }
 
 
@@ -129,5 +137,21 @@ public class Paciente {
 
     public void setMedicionesHistoricas(List<Medicion> medicionesHistoricas) {
         this.medicionesHistoricas = medicionesHistoricas;
+    }
+
+    public String getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(String tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
+    public String getExamenes() {
+        return examenes;
+    }
+
+    public void setExamenes(String examenes) {
+        this.examenes = examenes;
     }
 }

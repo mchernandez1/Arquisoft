@@ -49,6 +49,7 @@ public class PacienteMock {
     public void save(Paciente paciente){
         lista.add(paciente);
     }
+
     public void update(Paciente paciente){
         for (int i = 0; i<lista.size();i++){
             if(lista.get(i).getDocumento()==paciente.getDocumento()){

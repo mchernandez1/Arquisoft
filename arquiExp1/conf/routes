@@ -19,3 +19,11 @@ GET     /paciente/:id                controllers.PacienteController.getPaciente(
 POST    /paciente                    controllers.PacienteController.createPaciente()
 DELETE  /paciente/:id                controllers.PacienteController.deletePaciente(id : Long)
 PUT     /paciente/:id                controllers.PacienteController.updatePaciente(id : Long)
+
+
+#Medicion
+GET     /medicion                    controllers.MedicionController.getMediciones()
+GET     /medicion/:id                controllers.MedicionController.getMedicion(id : Long)
+POST    /medicion                    controllers.MedicionController.createMedicion()
+DELETE  /medicion/:id                controllers.MedicionController.deleteMedicion(id : Long)
+PUT     /medicion/:id                controllers.MedicionController.updateMedicion(id : Long)
