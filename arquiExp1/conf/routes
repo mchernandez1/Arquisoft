@@ -20,10 +20,17 @@ POST    /paciente                    controllers.PacienteController.createPacien
 DELETE  /paciente/:id                controllers.PacienteController.deletePaciente(id : Long)
 PUT     /paciente/:id                controllers.PacienteController.updatePaciente(id : Long)
 
+#sensor
+GET     /sensor                      controllers.SensorController.getSensores()
+GET     /sensor/:idSensor            controllers.SensorController.getSensor(idSensor : Long)
+POST    /sensor                      controllers.SensorController.createSensor()
+DELETE  /sensor/:idSensor            controllers.SensorController.deleteSensor(idSensor : Long)
+PUT     /sensor/:idSensor            controllers.SensorController.updateSensor(idSensor : Long)
 
 #Medicion
 GET     /medicion                    controllers.MedicionController.getMediciones()
 GET     /medicion/:id                controllers.MedicionController.getMedicion(id : Long)
+GET     /medicion/:pFecha             controllers.MedicionController.getByFecha(pFecha : String)
 POST    /medicion                    controllers.MedicionController.createMedicion()
 DELETE  /medicion/:id                controllers.MedicionController.deleteMedicion(id : Long)
 PUT     /medicion/:id                controllers.MedicionController.updateMedicion(id : Long)

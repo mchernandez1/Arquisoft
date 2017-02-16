@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by d.marino10 on 15/02/2017.
@@ -26,6 +27,8 @@ public class Medicion extends Model {
 
     private String presion;
 
+    private String fecha;
+
     @ManyToOne
     private Paciente paciente;
 
@@ -37,19 +40,21 @@ public class Medicion extends Model {
 
     }
 
-    public Medicion(String frecuencia, String estres, String presion) {
+    public Medicion(String frecuencia, String estres, String presion, String fecha) {
         this.frecuencia = frecuencia;
         this.estres = estres;
         this.presion = presion;
         this.paciente = paciente;
+        this.fecha = fecha;
     }
 
-    public Medicion(String estado, String frecuencia, String estres, String presion, Paciente paciente) {
+    public Medicion(String estado, String frecuencia, String estres, String presion, Paciente paciente, String fecha) {
         this.estado = estado;
         this.frecuencia = frecuencia;
         this.estres = estres;
         this.presion = presion;
         this.paciente = paciente;
+        this.fecha = fecha;
     }
 
     //-----------------------------------------------------------
@@ -100,4 +105,8 @@ public class Medicion extends Model {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
+
+    public String getFecha() {return fecha;}
+
+    public void setFecha(String fecha) {this.fecha = fecha;}
 }

@@ -1,10 +1,9 @@
 package models;
 
 import com.avaje.ebean.Model;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Created by AndresFelipe on 14/02/2017.
@@ -25,7 +24,7 @@ public class Sensor extends Model {
         ESTRES
     }
 
-    public static Finder<Long, Sensor> finder = new Finder<>(Sensor.class);
+    public static Finder<Long, Sensor> FINDER = new Finder<>(Sensor.class);
 
     //-----------------------------
     // ATRIBUTOS
@@ -37,39 +36,42 @@ public class Sensor extends Model {
     @GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "Sensor")
     private Long id;
 
+    @ManyToOne
+    private Paciente paciente;
+
+    @OneToMany
+    private ArrayList<Registro> registros;
     /**
      * Atributo que indica el tipo de sensor.
      */
     private TipoSensor tipo;
 
-    /**
-     * Atributo que contendra el dato recibido por el sensor
-     */
-    private double dato;
-
-    /**
-     * Atributo que indica la fecha de la toma del dato del sensor
-     */
-    private Date fecha;
+    private String fecha;
 
     //-------------------------
     // CONSTRUCTOR
     //-------------------------
-
     /**
      * Metodo constructor sin atributos
      */
-    public Sensor (){
+    public Sensor(){
 
     }
 
     /**
      * Metodo constructor de la clase Sensor
      */
-    public Sensor(TipoSensor pTipo){
+    public Sensor(Long pId, TipoSensor pTipo, String pFecha){
+        id = pId;
         tipo = pTipo;
-        dato = 0.0;
-        fecha = new Date();
+        fecha = pFecha;
+    }
+
+    public Sensor (Long pId, TipoSensor pTipo, String pFecha, Paciente pPaciente){
+        id = pId;
+        tipo = pTipo;
+        fecha = pFecha;
+        paciente = pPaciente;
     }
 
     //--------------------------
@@ -108,39 +110,23 @@ public class Sensor extends Model {
     }
 
     /**
-     * Metodo que retorna el dato obtenido por el sensor
-     * @return dato obtenido por el sensor
+     * Metodo que retorna el paciente asociado al sensor
+     * @return paciente
      */
-    public double getDato() {
-        return dato;
+    public Paciente getPaciente(){ return paciente;}
+
+    /**
+     * Metodo que modifica el paciente asociado al sensor
+     * @param pPaciente nuevo paciente
+     */
+    public void setPaciente( Paciente pPaciente){ paciente = pPaciente;}
+
+    public String getFecha() {
+        return fecha;
     }
 
-    /**
-     * Metodo que modifica el dato del sensor
-     * @param dato nuevo dato del sensor
-     */
-    public void setDato(double dato){this.dato = dato;}
-
-    /**
-     * Metodo que retorna la fecha en la cual se tomo la medicion del dato.
-     * @return fecha de la medicion
-     */
-    public Date getFecha() {return fecha;}
-
-    /**
-     * Metodo que modifica la fecha en la que se tomo la medicion
-     * @param fecha nueva fecha de medicion
-     */
-    public void setFecha(Date fecha) {this.fecha = fecha;}
-
-    @Override
-    public String toString() {
-        return "Sensor{" +
-                "id=" + id +
-                ", tipo=" + tipo +
-                ", dato=" + dato +
-                ", fecha=" + fecha +
-                '}';
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     //------------------------------
