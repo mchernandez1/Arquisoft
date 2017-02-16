@@ -1,6 +1,6 @@
 package Mocks;
 
-import models.Urgencia;
+import models.Urgencias;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,19 +10,19 @@ import java.util.List;
  */
 public class UrgenciaMock {
 
-    public static List<Urgencia> listaU;
+    public static List<Urgencias> listaU;
 
     public UrgenciaMock(){
         listaU = new ArrayList();
     }
 
-    public static List<Urgencia> getUrgencias(){
+    public static List<Urgencias> getUrgencias(){
         return listaU;
     }
 
-    public static Urgencia getUrgencia(Long id){
+    public static Urgencias getUrgencia(Long id){
         for(int i = 0; i<listaU.size(); i++){
-            Urgencia actual = listaU.get(i);
+            Urgencias actual = listaU.get(i);
             if(actual.getId()==id){
                 return actual;
             }
@@ -31,7 +31,7 @@ public class UrgenciaMock {
     }
 
     public static boolean delete(Long id){
-        Urgencia urgencia = getUrgencia(id);
+        Urgencias urgencia = getUrgencia(id);
         boolean respuesta = false;
         if(urgencia==null){
             listaU.remove(urgencia);
@@ -40,13 +40,13 @@ public class UrgenciaMock {
         return respuesta;
     }
 
-    public void add(Urgencia urgencia){
+    public void add(Urgencias urgencia){
         listaU.add(urgencia);
     }
 
-    public void update(Urgencia urgencia){
+    public void update(Urgencias urgencia){
         for(int i = 0; i<listaU.size(); i++){
-            Urgencia actual = listaU.get(i);
+            Urgencias actual = listaU.get(i);
             if(actual.getId()==urgencia.getId()){
                 listaU.set(i, urgencia);
             }
