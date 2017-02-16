@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import static com.sun.xml.internal.ws.api.pipe.ThrowableContainerPropertySet.model;
 
 /**
  * Created by af.moreno10 on 10/02/2017.
