@@ -67,7 +67,6 @@ create table urgencia (
   id                            bigint not null,
   latitud                       bigint,
   longitud                      bigint,
-  paciente                      bigint,
   constraint pk_urgencia primary key (id)
 );
 create sequence urgencia_seq;

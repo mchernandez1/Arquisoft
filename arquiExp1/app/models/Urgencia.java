@@ -27,7 +27,7 @@ public class Urgencia extends Model {
     private Long id;
     private Long latitud;
     private Long longitud;
-    private Long paciente;
+    private Paciente paciente;
 
 
 
@@ -42,18 +42,18 @@ public class Urgencia extends Model {
         this.id = id;
     }
 
-    public Urgencia(Long id, Long latitud, Long longitud, Long paciente){
+    public Urgencia(Long id, Long latitud, Long longitud, Paciente paciente){
         this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
         this.paciente = paciente;
     }
 
-    public Long getPaciente() {
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Long paciente) {
+    public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 
