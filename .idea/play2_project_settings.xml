@@ -3,6 +3,13 @@
   <component name="Play2ExcludedModulesSettings">
     <option name="INFO">
       <map>
+        <entry key="Arquisoft">
+          <value>
+            <ProjectSettingsEntry>
+              <option name="playDistrPath" value="$USER_HOME$/.ivy2/cache/com.typesafe.play/play_2.11/jars/play_2.11-2.5.10.jar" />
+            </ProjectSettingsEntry>
+          </value>
+        </entry>
         <entry key="Proyecto final">
           <value>
             <ProjectSettingsEntry>
@@ -14,7 +21,7 @@
           <value>
             <ProjectSettingsEntry>
               <option name="sourceDir" value="C:\Users\Maria\Dropbox\2017-10\Arquisoft\Proyecto final\arquiExp1\app" />
-              <option name="confDir" value="C:\Users\Maria\Dropbox\2017-10\Arquisoft\Proyecto final\arquiExp1\app" />
+              <option name="confDir" value="C:\Users\AndresFelipe\Music\Arquisoft\arquiExp1\app" />
               <option name="templateImports">
                 <list>
                   <option value="models._" />
@@ -39,7 +46,7 @@
                   <option value="play.libs.F" />
                 </list>
               </option>
-              <option name="uri" value="/C:/Users/Maria/Dropbox/2017-10/Arquisoft/Proyecto%20final/arquiExp1" />
+              <option name="uri" value="/C:/Users/AndresFelipe/Music/Arquisoft/arquiExp1" />
             </ProjectSettingsEntry>
           </value>
         </entry>
