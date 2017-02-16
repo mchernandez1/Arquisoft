@@ -22,7 +22,7 @@ create table medicion (
 );
 
 create table medicos (
-  id_medico                     integer not null,
+  id_medico                     bigint not null,
   nombre_medico                 varchar(255),
   especialidad_medico           varchar(255),
   descripcion_medico            varchar(255),
@@ -63,14 +63,14 @@ create table sensores (
 );
 create sequence Sensor;
 
-create table urgencias (
+create table urgencia (
   id                            bigint not null,
   latitud                       bigint,
   longitud                      bigint,
-  estado_paciente               varchar(255),
-  constraint pk_urgencias primary key (id)
+  paciente                      bigint,
+  constraint pk_urgencia primary key (id)
 );
-create sequence Urgencia;
+create sequence urgencia_seq;
 
 alter table medicion add constraint fk_medicion_paciente_documento foreign key (paciente_documento) references paciente (documento) on delete restrict on update restrict;
 create index ix_medicion_paciente_documento on medicion (paciente_documento);
@@ -110,6 +110,6 @@ drop sequence if exists Registro;
 drop table if exists sensores;
 drop sequence if exists Sensor;
 
-drop table if exists urgencias;
-drop sequence if exists Urgencia;
+drop table if exists urgencia;
+drop sequence if exists urgencia_seq;
 
