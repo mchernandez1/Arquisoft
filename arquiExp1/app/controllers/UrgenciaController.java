@@ -13,6 +13,8 @@ import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Controller;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -36,6 +38,54 @@ public class UrgenciaController extends Controller{
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode j = request().body().asJson();
         Urgencia urgencia = Json.fromJson(j, Urgencia.class);
+        String eol = System.getProperty("line.separator");
+        String message = "Se ha recibido una nueva urgencia, Dirigirse a: "
+                + urgencia.getLatitud() + ", " + urgencia.getLongitud()
+                + eol + "Información del paciente: " + urgencia.getPaciente().getNombre() + eol
+                + "\nDocumento: " + urgencia.getPaciente().getDocumento()+eol
+                + "\nTipo de sangre: " + urgencia.getPaciente().getTipoSangre()
+                + "\nTipo de sangre: " + urgencia.getPaciente().getTipoSangre()
+                +"\nTratamientos: " + urgencia.getPaciente().getTratamientos()
+                +"\nExámenes pendientes: " + urgencia.getPaciente().getExamenes()
+
+
+                ;
+        String header = "Nueva Urgencia";
+        JFrame frame = new JFrame();
+        frame.setSize(300,180);
+        frame.setLayout(new GridBagLayout());
+        frame.setResizable(true);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 2.0f;
+        constraints.weighty = 2.0f;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.fill = GridBagConstraints.BOTH;
+        JLabel headingLabel = new JLabel(header);
+        JOptionPane op = new JOptionPane(new Object(), JOptionPane.WARNING_MESSAGE);
+        headingLabel.setIcon(op.getIcon());
+        headingLabel.setOpaque(false);
+        frame.add(headingLabel, constraints);
+        constraints.gridx++;
+        constraints.weightx = 0f;
+        constraints.weighty = 0f;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.NORTH;
+
+
+        constraints.gridx = 0;
+        constraints.gridy++;
+        constraints.weightx = 1.0f;
+        constraints.weighty = 1.0f;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.fill = GridBagConstraints.BOTH;
+        JLabel messageLabel = new JLabel("<HtMl>"+message);
+        frame.add(messageLabel, constraints);
+
+        frame.setVisible(true);
+        System.out.println("SE HA CREADO UNA NUEVA URGENCIA: " + "\n" + "ACUDIR A: " + urgencia.getLatitud() + ", " + urgencia.getLongitud());
+
         return CompletableFuture.supplyAsync(
                 ()->{
                     //um.add(urgencia);
