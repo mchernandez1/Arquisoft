@@ -28,7 +28,7 @@ public class SensorController extends Controller{
     @Inject
     HttpExecutionContext ec;
 
-    SensorMock mock = new SensorMock();
+    //SensorMock mock = new SensorMock();
 
     //---------------------------------
     //     GET Sensores
@@ -38,13 +38,14 @@ public class SensorController extends Controller{
         return CompletableFuture.
                 supplyAsync(
                         () -> {
+                            return Sensor.FINDER.all();
                             //return Sensor.FINDER.where().eq("paciente_id", idPaciente).findList();
-                            return mock.getAll();
+                            //return mock.getAll();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        sensorEntities -> {
-                            return ok(toJson(sensorEntities));
+                        sensor -> {
+                            return ok(toJson(sensor));
                         }
                 );
     }
@@ -56,8 +57,8 @@ public class SensorController extends Controller{
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
                 () -> {
-                    //return Sensor.FINDER.byId(idSensor);
-                    return mock.get(idSensor);
+                    return Sensor.FINDER.byId(idSensor);
+                    //return mock.get(idSensor);
                 }
                 ,jdbcDispatcher)
                 .thenApply(
@@ -75,8 +76,8 @@ public class SensorController extends Controller{
                 ()->{
                     //Paciente pPaciente = Paciente.FINDER.byId(idPaciente);
                     //sensor.setPaciente(pPaciente);
-                    //sensor.save();
-                    mock.save(sensor);
+                    sensor.save();
+                    //mock.save(sensor);
                     return sensor;
                 }
         ).thenApply(
@@ -91,10 +92,10 @@ public class SensorController extends Controller{
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    //Sensor.FINDER.deleteById(idSensor);
-                    mock.delete(idSensor);
-                    Sensor sensor = mock.get(idSensor);
-                    return sensor;
+                    Sensor.FINDER.deleteById(idSensor);
+                    //mock.delete(idSensor);
+                    //Sensor sensor = mock.get(idSensor);
+                    return idSensor;
                 }
                 ,jdbcDispatcher)
                 .thenApply(
@@ -111,12 +112,15 @@ public class SensorController extends Controller{
                 ()->{
                     JsonNode nSensor = request().body().asJson();
                     Sensor sensor = Json.fromJson(nSensor, Sensor.class);
-                    //Sensor sensorPorActualizar = Sensor.FINDER.byId(idSensor);
-                    //sensorPorActualizar.setTipo(sensor.getTipo());
-                    //sensorPorActualizar.update();
-                    mock.update(sensor);
-                    return sensor;
-                    //return sensorPorActualizar;
+                    Sensor sensorPorActualizar = Sensor.FINDER.byId(idSensor);
+                    sensorPorActualizar.setTipo(sensor.getTipo());
+                    sensorPorActualizar.setPaciente(sensor.getPaciente());
+                    sensorPorActualizar.setFechaAsigancion(sensor.getFechaAsignacion());
+                    sensorPorActualizar.setRegistros(sensor.getRegistros());
+                    sensorPorActualizar.update();
+                    //mock.update(sensor);
+                    //return sensor;
+                    return sensorPorActualizar;
                 }
                 ,ec.current())
                 .thenApply(

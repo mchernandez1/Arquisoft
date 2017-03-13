@@ -10,13 +10,14 @@ import java.util.List;
  * Created by af.moreno10 on 10/02/2017.
  */
 @Entity
-public class Paciente {
+@Table(name = "paciente")
+public class Paciente extends Model
+{
 
-    //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
-
+    public static Model.Finder<Long, Paciente> FINDER = new Finder<>(Paciente.class);
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PacienteEntity")
+
     private long documento;
 
     private String nombre;
@@ -37,6 +38,10 @@ public class Paciente {
     private String tratamientos;
 
     private String examenes;
+
+    @ManyToOne
+
+    private Medico medico;
 
 
     //-----------------------------------------------------------
@@ -153,5 +158,14 @@ public class Paciente {
 
     public void setExamenes(String examenes) {
         this.examenes = examenes;
+    }
+
+    public Medico getMedico() {
+        return medico;
+
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Inject;
 import dispatchers.AkkaDispatcher;
 import models.Medicion;
+import models.Medico;
 import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Controller;
@@ -27,7 +28,7 @@ public class MedicionController extends Controller {
     @Inject
     HttpExecutionContext ec;
 
-    MedidorMock mock= new MedidorMock();
+    //MedidorMock mock= new MedidorMock();
 
     public CompletionStage<Result> getMediciones(){
 
@@ -36,28 +37,28 @@ public class MedicionController extends Controller {
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return mock.getAll();
+                            return Medicion.FINDER.all();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        pozoEntities -> {
-                            return ok(toJson(pozoEntities));
+                        Mediciones -> {
+                            return ok(toJson(Mediciones));
                         }
                 );
     }
 
-    public CompletionStage<Result> getMedicion(long id){
+    public CompletionStage<Result> getMedicion(long referencia){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return mock.get(id);
+                            return Medicion.FINDER.byId(referencia);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        productEntities -> {
-                            return ok(toJson(productEntities));
+                        Mediciones -> {
+                            return ok(toJson(Mediciones));
                         }
                 );
     }
@@ -69,34 +70,33 @@ public class MedicionController extends Controller {
         Medicion medicion = Json.fromJson(m, Medicion.class);
         return CompletableFuture.supplyAsync(
                 () -> {
-                    mock.save(medicion);
+                    medicion.save();
                     return medicion;
                 }
         ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
+                Medicion -> {
+                    return ok(Json.toJson(Medicion));
                 }
         );
     }
 
-    public CompletionStage<Result> deleteMedicion(long id)
+    public CompletionStage<Result> deleteMedicion(long referencia)
     {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.supplyAsync(
                 ()->{
-                    mock.delete(id);
-                    Medicion medicion = mock.get(id);
-                    return medicion;
+                    Medicion.FINDER.deleteById(referencia);
+                    return referencia;
                 }
         ).thenApply(
-                productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                 Medicion -> {
+                    return ok(Json.toJson(Medicion));
                 }
         );
     }
 
-    public CompletionStage<Result> updateMedicion(Long id){
+    public CompletionStage<Result> updateMedicion(long referencia){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -105,16 +105,26 @@ public class MedicionController extends Controller {
                         () -> {
                             JsonNode m = request().body().asJson();
                             Medicion medicion = Json.fromJson(m, Medicion.class);
-                            mock.update(medicion);
-                            return medicion;
+                            Medicion pPorActualizar =  Medicion.FINDER.byId(referencia);
+
+                            pPorActualizar.setEstado(medicion.getEstado());
+                            pPorActualizar.setEstres(medicion.getEstres());
+                            pPorActualizar.setFrecuencia(medicion.getFrecuencia());
+                            pPorActualizar.setPresion(medicion.getPresion());
+
+                            pPorActualizar.update();
+
+                            return pPorActualizar;
                         }
                         ,ec.current())
                 .thenApply(
-                        campoEntity -> {
-                            return ok(toJson(campoEntity));
+                        Medicion -> {
+                            return ok(toJson(Medicion));
                         }
                 );
     }
+
+
 
     public CompletionStage<Result> getByFecha(String pFecha){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -122,12 +132,12 @@ public class MedicionController extends Controller {
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return mock.getByFecha(pFecha);
+                            return Medicion.FINDER.where().eq("fecha",pFecha);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        productEntities -> {
-                            return ok(toJson(productEntities));
+                        Medicion -> {
+                            return ok(toJson(Medicion));
                         }
                 );
     }

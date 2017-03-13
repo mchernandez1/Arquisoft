@@ -16,7 +16,7 @@ public class Hospital extends Model {
     public static Finder<Long, Hospital> FINDER = new Finder<>(Hospital.class);
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Hospital")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "HospitalEntity")
     private Long id;
 
     private List<Paciente> listaPacientes;

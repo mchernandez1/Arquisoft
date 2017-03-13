@@ -9,7 +9,9 @@ import java.util.Date;
  * Created by AndresFelipe on 15/02/2017.
  */
 @Entity
-public class Registro extends Model{
+@Table (name = "registro")
+public class Registro extends Model
+{
 
     public static Finder<Long, Registro> FINDER = new Finder<>(Registro.class);
 
@@ -17,7 +19,7 @@ public class Registro extends Model{
     //     ATRIBUTOS
     //------------------------------
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "Registro")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "RegistroEntity")
     private Long id;
 
     @ManyToOne

@@ -3,6 +3,8 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -11,19 +13,18 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="medicos")
-public class Medico extends Model
-{
+@Table(name="medico")
+public class Medico extends Model {
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
 
-    //public static Model.Finder<Integer, Medico> FINDER = new Model.Finder<>(Medico.class);
+    public static Model.Finder<Long, Medico> FINDER = new Finder<>(Medico.class);
     /**
      * Referencia que identifica al medico en el sistema.
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Medico")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MedicoEntity")
 
     /**
      * Identificación dentro del sistema del medico.
@@ -46,23 +47,35 @@ public class Medico extends Model
     private String descripcionMedico;
 
 
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
+    private List<Paciente> pacientesDelMedico;
+
     //-------------------------------------------------------------
     //Constructores
     //-------------------------------------------------------------
 
     /**
      * Constructor 1
-     * @param id Identificación de medico
-     * @param nombre Nombre del medico
+     *
+     * @param id           Identificación de medico
+     * @param nombre       Nombre del medico
      * @param especialidad Especialidad que posee el medico
-     * @param descripcion Información adicional del medico
+     * @param descripcion  Información adicional del medico
      */
-    public Medico(long id, String nombre, String especialidad, String descripcion)
-    {
+    public Medico(long id, String nombre, String especialidad, String descripcion) {
         this.idMedico = id;
         this.nombreMedico = nombre;
-        this.especialidadMedico  = especialidad;
+        this.especialidadMedico = especialidad;
         this.descripcionMedico = descripcion;
+        pacientesDelMedico = new ArrayList<Paciente>();
+    }
+
+    public Medico(long id, String nombre, String especialidad, String descripcion, List<Paciente> pacientesDoctor) {
+        this.idMedico = id;
+        this.nombreMedico = nombre;
+        this.especialidadMedico = especialidad;
+        this.descripcionMedico = descripcion;
+        this.pacientesDelMedico = pacientesDoctor;
     }
 
     /**
@@ -70,80 +83,91 @@ public class Medico extends Model
      * @param idMedico Identificación del medico
      */
 
-   // public Medico(Long idMedico)
+    // public Medico(Long idMedico)
     //{
-      //  this.idMedico = idMedico;
-   // }
+    //  this.idMedico = idMedico;
+    // }
 
     /**
      * Constructor pruebas SIN parametros
      */
     //public Medico()
     //{
-        //this.idMedico=0L;
-        //this.nombreMedico = "Medico no real";
-        //this.especialidadMedico = "No se ha graduado";
-      //  this.descripcionMedico = "Grupo sanguíneo: o+. No enfermedades hereditarias";
+    //this.idMedico=0L;
+    //this.nombreMedico = "Medico no real";
+    //this.especialidadMedico = "No se ha graduado";
+    //  this.descripcionMedico = "Grupo sanguíneo: o+. No enfermedades hereditarias";
     //}
 
     //-------------------------------------------------------------
     //Metódos
     //-------------------------------------------------------------
-
-
-    public Long getIdMedico()
-    {
+    public Long getIdMedico() {
         return idMedico;
     }
 
-    public void setIdMedico(Long idMedico)
-    {
+    public void setIdMedico(Long idMedico) {
         this.idMedico = idMedico;
     }
 
-    public String getNombreMedico()
-    {
+    public String getNombreMedico() {
         return nombreMedico;
     }
 
-    public void setNombreMedico(String nombreMedico)
-    {
+    public void setNombreMedico(String nombreMedico) {
         this.nombreMedico = nombreMedico;
     }
 
-    public String getEspecialidadMedico()
-    {
+    public String getEspecialidadMedico() {
         return especialidadMedico;
     }
 
-    public void setEspecialidadMedico(String especialidadMedico)
-    {
+    public void setEspecialidadMedico(String especialidadMedico) {
         this.especialidadMedico = especialidadMedico;
     }
 
-    public String getDescripcionMedico()
-    {
+    public String getDescripcionMedico() {
         return descripcionMedico;
     }
 
-    public void setDescripcionMedico(String descripcionMedico)
-    {
+    public void setDescripcionMedico(String descripcionMedico) {
         this.descripcionMedico = descripcionMedico;
     }
 
 
-
-    @Override
-    public String toString()
-    {
-        return "Medico{" +
-                "id Medico:" + idMedico +
-                ", Nombre Medico:" + nombreMedico +
-                ", Especialidad Medico:" + especialidadMedico +
-                ", Descripción Médico:" + descripcionMedico +
-                '}';
-
+    public List<Paciente> getPacientesDelMedico() {
+        return pacientesDelMedico;
     }
+
+    public void setPacientesDelMedico(List<Paciente> pacientesDelMedico) {
+        this.pacientesDelMedico = pacientesDelMedico;
+    }
+
+    public Paciente buscarPaciente(int idPaciente)
+    {
+        Paciente paciente = null;
+        for (int i = 0; i < pacientesDelMedico.size(); i++)
+        {
+            if (pacientesDelMedico.get(i).getDocumento() == idPaciente)
+            {
+                return paciente = pacientesDelMedico.get(i);
+            }
+        }
+
+        return paciente;
+    }
+}
+
+    //public String toString()
+   // {
+      //  return "Medico{" +
+              //  "id Medico:" + idMedico +
+            //    ", Nombre Medico:" + nombreMedico +
+          //      ", Especialidad Medico:" + especialidadMedico +
+        //        ", Descripción Médico:" + descripcionMedico +
+      //          '}';
+
+    //}
 
     /**
      * Crear un objeto Medico apartir de un nodo Json
@@ -159,4 +183,4 @@ public class Medico extends Model
 
         //return medico;
     //}
-}
+

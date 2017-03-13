@@ -4,26 +4,21 @@ import com.avaje.ebean.Finder;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
  * Created by af.moreno10 on 10/02/2017.
  */
 @Entity
-
 @Table(name="urgencia")
 public class Urgencia extends Model {
 
     public static Finder<Long, Urgencia> FINDER = new Finder<>(Urgencia.class);
 
-
-
-
-
     @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="UrgenciaEntity")
+
     private Long id;
     private Long latitud;
     private Long longitud;
