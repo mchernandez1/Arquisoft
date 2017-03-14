@@ -16,7 +16,7 @@ create table mediciones (
   frecuencia                    varchar(255),
   estres                        varchar(255),
   presion                       varchar(255),
-  fecha                         varchar(255),
+  fecha                         date,
   paciente_documento            bigint,
   constraint pk_mediciones primary key (referencia)
 );

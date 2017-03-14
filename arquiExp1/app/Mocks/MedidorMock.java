@@ -55,13 +55,4 @@ public class MedidorMock {
             }
         }
     }
-
-    public List<Medicion> getByFecha(String pFecha){
-        List<Medicion> listaMed = new ArrayList<Medicion>();
-        for(int i=0; i<lista.size();i++){
-            if(lista.get(i).getFecha()==pFecha)
-                listaMed.add(lista.get(i));
-        }
-        return listaMed;
-    }
 }

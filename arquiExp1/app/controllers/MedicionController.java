@@ -12,6 +12,7 @@ import play.libs.concurrent.HttpExecutionContext;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -126,13 +127,25 @@ public class MedicionController extends Controller {
 
 
 
-    public CompletionStage<Result> getByFecha(String pFecha){
+    public CompletionStage<Result> getByFechas(String fInicio, String fFinal){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return Medicion.FINDER.where().eq("fecha",pFecha);
+                            DateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm");
+                            Date fechaInicio=null;
+                            Date fechaFin=null;
+
+                            try {
+                                fechaInicio = df.parse(fInicio);
+                                fechaFin = df.parse(fFinal);
+                            }
+                            catch (Exception e){
+
+                            }
+                            System.out.println(fechaInicio + " to " + fechaFin+ " ");
+                            return Medicion.FINDER.where().between("fecha", fechaInicio,fechaFin).findList();
                         }
                         ,jdbcDispatcher)
                 .thenApply(

@@ -1,9 +1,11 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Created by d.marino10 on 15/02/2017.
@@ -27,7 +29,10 @@ public class Medicion extends Model
 
     private String presion;
 
-    private String fecha;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd 'at' HH:mm")
+    private Calendar fecha;
 
     @ManyToOne
     private Paciente paciente;
@@ -40,27 +45,31 @@ public class Medicion extends Model
 
     }
 
-    public Medicion(String frecuencia, String estres, String presion, String fecha) {
+    public Medicion(String frecuencia, String estres, String presion) {
         this.frecuencia = frecuencia;
         this.estres = estres;
         this.presion = presion;
         this.paciente = paciente;
-        this.fecha = fecha;
+        this.fecha =Calendar.getInstance();
     }
 
-    public Medicion(String estado, String frecuencia, String estres, String presion, Paciente paciente, String fecha) {
+    public Medicion(String estado, String frecuencia, String estres, String presion, Paciente paciente) {
         this.estado = estado;
         this.frecuencia = frecuencia;
         this.estres = estres;
         this.presion = presion;
         this.paciente = paciente;
-        this.fecha = fecha;
+        this.fecha =Calendar.getInstance();
     }
 
     //-----------------------------------------------------------
     // Getters y setters
     //-----------------------------------------------------------
 
+    @PrePersist
+    private void creationTimestamp() {
+        this.fecha =Calendar.getInstance();
+    }
 
     public Long getReferencia() {
         return referencia;
@@ -106,7 +115,6 @@ public class Medicion extends Model
         this.paciente = paciente;
     }
 
-    public String getFecha() {return fecha;}
+    public Calendar getFecha() {return fecha;}
 
-    public void setFecha(String fecha) {this.fecha = fecha;}
 }

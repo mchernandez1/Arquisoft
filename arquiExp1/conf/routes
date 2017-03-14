@@ -30,7 +30,7 @@ PUT     /sensor/:idSensor            controllers.SensorController.updateSensor(i
 #Medicion
 GET     /medicion                    controllers.MedicionController.getMediciones()
 GET     /medicion/:id                controllers.MedicionController.getMedicion(id : Long)
-GET     /medicion/:pFecha            controllers.MedicionController.getByFecha(pFecha : String)
+GET     /medicion/enRango/           controllers.MedicionController.getByFechas(inicio: String, fin : String)
 POST    /medicion                    controllers.MedicionController.createMedicion()
 DELETE  /medicion/:id                controllers.MedicionController.deleteMedicion(id : Long)
 PUT     /medicion/:id                controllers.MedicionController.updateMedicion(id : Long)
