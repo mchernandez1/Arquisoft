@@ -144,7 +144,6 @@ public class MedicionController extends Controller {
                             catch (Exception e){
 
                             }
-                            System.out.println(fechaInicio + " to " + fechaFin+ " ");
                             return Medicion.FINDER.where().between("fecha", fechaInicio,fechaFin).findList();
                         }
                         ,jdbcDispatcher)

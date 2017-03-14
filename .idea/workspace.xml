@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39d87d7d-f2f7-4974-8177-8804cdfe4cb6" name="Default" comment="Aquí vamos :)">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_apache_httpcomponents_httpclient_4_0_1_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_apache_httpcomponents_httpclient_4_0_1_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_apache_httpcomponents_httpcore_4_0_1_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_apache_httpcomponents_httpcore_4_0_1_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_library_2_11_7_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_library_2_11_7_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="39d87d7d-f2f7-4974-8177-8804cdfe4cb6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arquiExp1/app/Mocks/MedidorMock.java" afterPath="$PROJECT_DIR$/arquiExp1/app/Mocks/MedidorMock.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arquiExp1/app/controllers/MedicionController.java" afterPath="$PROJECT_DIR$/arquiExp1/app/controllers/MedicionController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arquiExp1/app/models/Medicion.java" afterPath="$PROJECT_DIR$/arquiExp1/app/models/Medicion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arquiExp1/conf/application.conf" afterPath="$PROJECT_DIR$/arquiExp1/conf/application.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arquiExp1/conf/evolutions/default/1.sql" afterPath="$PROJECT_DIR$/arquiExp1/conf/evolutions/default/1.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arquiExp1/conf/routes" afterPath="$PROJECT_DIR$/arquiExp1/conf/routes" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/arquiExp1/target/" />
@@ -98,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/arquiExp1/app/controllers/MedicionController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="269">
-              <caret line="146" column="78" lean-forward="false" selection-start-line="146" selection-start-column="78" selection-end-line="146" selection-end-column="78" />
+              <caret line="145" column="29" lean-forward="false" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -129,6 +119,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="dmarino &lt;d.marino10@uniandes.edu.co&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
@@ -706,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487213681507</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Ya busca por fechas">
+      <created>1489460477778</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1489460477778</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -723,7 +725,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1380" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.49348533" order="6" side_tool="false" content_ui="tabs" />
@@ -740,7 +742,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36437908" sideWeight="0.5054054" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33712122" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33712122" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972856" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972856" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -813,7 +815,8 @@
     <MESSAGE value="Sensor listo para JMeter" />
     <MESSAGE value="Cambios para Commit Sensores" />
     <MESSAGE value="Aquí vamos :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aquí vamos :)" />
+    <MESSAGE value="Ya busca por fechas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ya busca por fechas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -954,6 +957,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1139,7 +1143,7 @@
     <entry file="file://$PROJECT_DIR$/arquiExp1/app/controllers/MedicionController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
-          <caret line="146" column="78" lean-forward="false" selection-start-line="146" selection-start-column="78" selection-end-line="146" selection-end-column="78" />
+          <caret line="145" column="29" lean-forward="false" selection-start-line="145" selection-start-column="29" selection-end-line="145" selection-end-column="29" />
           <folding />
         </state>
       </provider>
