@@ -30,7 +30,7 @@ PUT     /sensor/:idSensor            controllers.SensorController.updateSensor(i
 #Medicion
 GET     /medicion                    controllers.MedicionController.getMediciones()
 GET     /medicion/:id                controllers.MedicionController.getMedicion(id : Long)
-GET     /medicion/:pFecha             controllers.MedicionController.getByFecha(pFecha : String)
+GET     /medicion/:pFecha            controllers.MedicionController.getByFecha(pFecha : String)
 POST    /medicion                    controllers.MedicionController.createMedicion()
 DELETE  /medicion/:id                controllers.MedicionController.deleteMedicion(id : Long)
 PUT     /medicion/:id                controllers.MedicionController.updateMedicion(id : Long)
@@ -41,13 +41,6 @@ GET     /medico/:id                controllers.MedicoController.getMedico(id : L
 POST    /medico                    controllers.MedicoController.createMedico()
 DELETE  /medico/:id                controllers.MedicoController.deleteMedico(id : Long)
 PUT     /medico/:id                controllers.MedicoController.updateMedico(id : Long)
-
-#Medico Especialidad
-GET     /medicoEspecialista                    controllers.MedicoEspecialistaController.getMedicosEspecialista()
-GET     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.getMedicoEspecialista(id : Long)
-POST    /medicoEspecialista                    controllers.MedicoEspecialistaController.createMedicoEspecialista()
-DELETE  /medicoEspecialista/:id                controllers.MedicoEspecialistaController.deleteMedicoEspecialista(id : Long)
-PUT     /medicoEspecialista/:id                controllers.MedicoEspecialistaController.updateMedicoEspecialista(id : Long)
 
 #Urgencias
 GET     /urgencia                    controllers.UrgenciaController.getUrgencias()
@@ -61,4 +54,4 @@ GET     /hospital                    controllers.HospitalController.getHospitale
 GET     /hospital/:id                controllers.HospitalController.getHospital(id : Long)
 POST    /hospital                    controllers.HospitalController.createHospital()
 DELETE  /hospital/:id                controllers.HospitalController.deleteHospital(id : Long)
-PUT     /hospital/:id                controllers.HospitalController.updateHospital(id : Long)
+

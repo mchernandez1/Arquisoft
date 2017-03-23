@@ -9,14 +9,14 @@ import java.util.Date;
  * Created by d.marino10 on 15/02/2017.
  */
 @Entity
-public class Medicion extends Model {
-
-    //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
+@Table (name = "mediciones")
+public class Medicion extends Model
+{
+    public static Model.Finder<Long, Medicion> FINDER = new Finder<>(Medicion.class);
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MedicionEntity")
+
     private Long referencia;
 
     private String estado;

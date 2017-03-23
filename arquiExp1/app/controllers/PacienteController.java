@@ -24,7 +24,7 @@ public class PacienteController extends Controller {
     @Inject
     HttpExecutionContext ec;
 
-    PacienteMock mock= new PacienteMock();
+    //PacienteMock mock= new PacienteMock();
 
     public CompletionStage<Result> getPacientes(){
 
@@ -33,12 +33,12 @@ public class PacienteController extends Controller {
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return mock.getAll();
+                            return Paciente.FINDER.all();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        pozoEntities -> {
-                            return ok(toJson(pozoEntities));
+                        pacientes -> {
+                            return ok(toJson(pacientes));
                         }
                 );
     }
@@ -49,12 +49,12 @@ public class PacienteController extends Controller {
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return mock.get(id);
+                            return Paciente.FINDER.byId(id);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        productEntities -> {
-                            return ok(toJson(productEntities));
+                        pacientes -> {
+                            return ok(toJson(pacientes));
                         }
                 );
     }
@@ -66,12 +66,12 @@ public class PacienteController extends Controller {
         Paciente paciente = Json.fromJson(p, Paciente.class);
         return CompletableFuture.supplyAsync(
                 () -> {
-                    mock.save(paciente);
+                    paciente.save();
                     return paciente;
                 }
         ).thenApply(
-                campoEntity -> {
-                    return ok(Json.toJson(campoEntity));
+                pacientes -> {
+                    return ok(Json.toJson(pacientes));
                 }
         );
     }
@@ -82,18 +82,17 @@ public class PacienteController extends Controller {
 
         return CompletableFuture.supplyAsync(
                 ()->{
-                    mock.delete(id);
-                    Paciente paciente = mock.get(id);
-                    return paciente;
+                    Paciente.FINDER.deleteById(id);
+                     return id;
                 }
         ).thenApply(
-                productEntity -> {
-                    return ok(Json.toJson(productEntity));
+                pacientes -> {
+                    return ok(Json.toJson(pacientes));
                 }
         );
     }
 
-    public CompletionStage<Result> updatePaciente(Long id){
+    public CompletionStage<Result> updatePaciente(long id){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -102,13 +101,27 @@ public class PacienteController extends Controller {
                         () -> {
                             JsonNode p = request().body().asJson();
                             Paciente paciente = Json.fromJson(p, Paciente.class);
-                            mock.update(paciente);
-                            return paciente;
+                            Paciente pPorActualizar = Paciente.FINDER.byId(id);
+
+                            pPorActualizar.setCelular(paciente.getCelular());
+                            pPorActualizar.setCiudad(paciente.getCiudad());
+                            pPorActualizar.setExamenes(paciente.getExamenes());
+                            pPorActualizar.setMedicionesHistoricas(paciente.getMedicionesHistoricas());
+                            pPorActualizar.setMedico(paciente.getMedico());
+                            pPorActualizar.setNombre(paciente.getNombre());
+                            pPorActualizar.setPais(paciente.getPais());
+                            pPorActualizar.setTelefono(paciente.getTelefono());
+                            pPorActualizar.setTratamientos(paciente.getTratamientos());
+
+                            pPorActualizar.update();
+
+                            return pPorActualizar;
+
                         }
                         ,ec.current())
                 .thenApply(
-                        campoEntity -> {
-                            return ok(toJson(campoEntity));
+                        paciente -> {
+                            return ok(toJson(paciente));
                         }
                 );
     }

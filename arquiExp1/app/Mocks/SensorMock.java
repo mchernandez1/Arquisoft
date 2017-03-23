@@ -60,7 +60,7 @@ public class SensorMock {
     public List<Sensor> getByFecha(String pFecha){
         List<Sensor> listaSen = new ArrayList<Sensor>();
         for(int i=0; i<lista.size();i++){
-            if(lista.get(i).getFecha()==pFecha)
+            if(lista.get(i).getFechaAsignacion()==pFecha)
                 listaSen.add(lista.get(i));
         }
         return listaSen;

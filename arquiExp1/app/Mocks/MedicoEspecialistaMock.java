@@ -28,7 +28,7 @@ public class MedicoEspecialistaMock
 
     public static MedicoEspecialista get(Long id){
         for (int i = 0; i<lista.size();i++){
-            if(lista.get(i).getId()==id){
+            if(lista.get(i).getIdMedico()==id){
                 return lista.get(i);
             }
         }
@@ -51,7 +51,7 @@ public class MedicoEspecialistaMock
 
     public void update(MedicoEspecialista medico){
         for (int i = 0; i<lista.size();i++){
-            if(lista.get(i).getId()==medico.getId()){
+            if(lista.get(i).getIdMedico()==medico.getIdMedico()){
                 lista.set(i,medico);
             }
         }

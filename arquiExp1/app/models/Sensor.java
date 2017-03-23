@@ -33,7 +33,7 @@ public class Sensor extends Model {
      * Atributo identificador del sensor.
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "Sensor")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE,generator = "SensorEntity")
     private Long id;
 
     @ManyToOne
@@ -46,7 +46,7 @@ public class Sensor extends Model {
      */
     private TipoSensor tipo;
 
-    private String fecha;
+    private String fechaAsignacion;
 
     //-------------------------
     // CONSTRUCTOR
@@ -64,13 +64,13 @@ public class Sensor extends Model {
     public Sensor(Long pId, TipoSensor pTipo, String pFecha){
         id = pId;
         tipo = pTipo;
-        fecha = pFecha;
+        fechaAsignacion = pFecha;
     }
 
     public Sensor (Long pId, TipoSensor pTipo, String pFecha, Paciente pPaciente){
         id = pId;
         tipo = pTipo;
-        fecha = pFecha;
+        fechaAsignacion = pFecha;
         paciente = pPaciente;
     }
 
@@ -121,12 +121,20 @@ public class Sensor extends Model {
      */
     public void setPaciente( Paciente pPaciente){ paciente = pPaciente;}
 
-    public String getFecha() {
-        return fecha;
+    public String getFechaAsignacion() {
+        return fechaAsignacion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaAsigancion(String fecha) {
+        this.fechaAsignacion = fecha;
+    }
+
+    public ArrayList<Registro> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(ArrayList<Registro> registros) {
+        this.registros = registros;
     }
 
     //------------------------------

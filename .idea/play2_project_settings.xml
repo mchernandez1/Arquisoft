@@ -20,8 +20,8 @@
         <entry key="root">
           <value>
             <ProjectSettingsEntry>
-              <option name="sourceDir" value="C:\Users\AndresFelipe\Music\Arquisoft\arquiExp1\app" />
-              <option name="confDir" value="C:\Users\Juan\Documents\Arquisoft\Proyecto\Nuevo\Arquisoft\arquiExp1\app" />
+              <option name="sourceDir" value="C:\Users\Maria\Videos\Arquisoft\arquiExp1\app" />
+              <option name="confDir" value="C:\Users\Maria\Videos\Arquisoft\arquiExp1\app" />
               <option name="templateImports">
                 <list>
                   <option value="models._" />
@@ -46,7 +46,7 @@
                   <option value="play.libs.F" />
                 </list>
               </option>
-              <option name="uri" value="/C:/Users/Juan/Documents/Arquisoft/Proyecto/Nuevo/Arquisoft/arquiExp1" />
+              <option name="uri" value="/C:/Users/Maria/Videos/Arquisoft/arquiExp1" />
             </ProjectSettingsEntry>
           </value>
         </entry>

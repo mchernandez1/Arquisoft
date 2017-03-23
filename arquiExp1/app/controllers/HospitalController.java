@@ -29,7 +29,7 @@ public class HospitalController extends Controller{
     @Inject
     HttpExecutionContext ec;
 
-    HospitalMock hm = new HospitalMock();
+    //HospitalMock hm = new HospitalMock();
 
 
     public CompletionStage<Result> createHospital(){
@@ -38,7 +38,7 @@ public class HospitalController extends Controller{
         Hospital hospital = Json.fromJson(j, Hospital.class);
         return CompletableFuture.supplyAsync(
                 ()->{
-                    hm.add(hospital);
+                    hospital.save();
                     return hospital;
                 }
         ).thenApply(
@@ -46,8 +46,6 @@ public class HospitalController extends Controller{
                     return ok(Json.toJson(hospital));
                 }
         );
-
-
     }
 
 
@@ -56,7 +54,7 @@ public class HospitalController extends Controller{
         return CompletableFuture.
                 supplyAsync(
                         ()->{
-                            return hm.getHospitales();
+                            return Hospital.FINDER.all();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
@@ -72,7 +70,7 @@ public class HospitalController extends Controller{
         return CompletableFuture.
                 supplyAsync(
                         ()->{
-                            return hm.getHospital(id);
+                            return Hospital.FINDER.byId(id);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
@@ -89,9 +87,8 @@ public class HospitalController extends Controller{
 
         return CompletableFuture.supplyAsync(
                 ()->{
-                    hm.delete(id);
-                    Hospital hospital = hm.getHospital(id);
-                    return hospital;
+                    Hospital.FINDER.deleteById(id);
+                    return id;
                 }
         ).thenApply(
                 hospitales -> {
@@ -100,25 +97,25 @@ public class HospitalController extends Controller{
         );
     }
 
-    public CompletionStage<Result> updateHospital(Long id){
 
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+  //  public CompletionStage<Result> updateHospital(Long id){
 
-        return CompletableFuture.
-                supplyAsync(
-                        () -> {
-                            JsonNode node = request().body().asJson();
-                            Hospital hospital = Json.fromJson(node, Hospital.class);
-                            hm.update(hospital);
-                            return hospital;
-                        }
-                        ,ec.current())
-                .thenApply(
-                        hospitales -> {
-                            return ok(toJson(hospitales));
-                        }
-                );
-    }
+    //    MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
+//        return CompletableFuture.
+  //              supplyAsync(
+    //                    () -> {
+      //                      JsonNode node = request().body().asJson();
+        //                    Hospital hospital = Json.fromJson(node, Hospital.class);
+          //                  hm.update(hospital);
+            //                return hospital;
+              //          }
+                //        ,ec.current())
+                //.thenApply(
+                  //      hospitales -> {
+                    //        return ok(toJson(hospitales));
+                      //  }
+               // );
+   // }
 
 }

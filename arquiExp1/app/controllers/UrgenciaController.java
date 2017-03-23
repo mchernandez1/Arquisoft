@@ -28,7 +28,7 @@ public class UrgenciaController extends Controller{
     @Inject
     HttpExecutionContext ec;
 
-    UrgenciaMock um = new UrgenciaMock();
+    //UrgenciaMock um = new UrgenciaMock();
 
 
 
@@ -38,7 +38,8 @@ public class UrgenciaController extends Controller{
         Urgencia urgencia = Json.fromJson(j, Urgencia.class);
         return CompletableFuture.supplyAsync(
                 ()->{
-                    um.add(urgencia);
+                    //um.add(urgencia);
+                    urgencia.save();
                     return urgencia;
                 }
         ).thenApply(
@@ -55,7 +56,8 @@ public class UrgenciaController extends Controller{
         return CompletableFuture.
                 supplyAsync(
                         ()->{
-                            return um.getUrgencias();
+                            return Urgencia.FINDER.all();
+                            //return um.getUrgencias();
                         }
                         ,jdbcDispatcher)
                 .thenApply(
@@ -65,12 +67,13 @@ public class UrgenciaController extends Controller{
                 );
     }
 
-    public CompletionStage<Result> getUrgencia(Long id){
+    public CompletionStage<Result> getUrgencia(long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.
                 supplyAsync(
                         ()->{
-                            return um.getUrgencia(id);
+                            //return um.getUrgencia(id);
+                            return Urgencia.FINDER.byId(id);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
@@ -87,9 +90,10 @@ public class UrgenciaController extends Controller{
 
         return CompletableFuture.supplyAsync(
                 ()->{
-                    um.delete(id);
-                    Urgencia urgencia = um.getUrgencia(id);
-                    return urgencia;
+                    Urgencia.FINDER.deleteById(id);
+                    //um.delete(id);
+                    //Urgencia urgencia = um.getUrgencia(id);
+                    return id;
                 }
         ).thenApply(
                 urgencias -> {
@@ -98,17 +102,28 @@ public class UrgenciaController extends Controller{
         );
     }
 
-    public CompletionStage<Result> updateUrgencia(Long id){
+    public CompletionStage<Result> updateUrgencia(long id){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
 
         return CompletableFuture.
                 supplyAsync(
                         () -> {
                             JsonNode node = request().body().asJson();
                             Urgencia urgencia = Json.fromJson(node, Urgencia.class);
-                            um.update(urgencia);
-                            return urgencia;
+                            Urgencia pPorActualizar = Urgencia.FINDER.byId(id);
+
+                            pPorActualizar.setPaciente(urgencia.getPaciente());
+                            pPorActualizar.setId(urgencia.getId());
+                            pPorActualizar.setLatitud(urgencia.getLatitud());
+                            pPorActualizar.setLongitud(urgencia.getLongitud());
+
+                            pPorActualizar.update();
+                            //um.update(urgencia);
+                            //return urgencia;
+
+                            return pPorActualizar;
                         }
                         ,ec.current())
                 .thenApply(
